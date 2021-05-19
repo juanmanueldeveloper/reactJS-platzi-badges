@@ -21,6 +21,7 @@ class Badges extends React.Component {
     componentDidMount(){
         console.log('3.- componentDidMount')
         this.fetchData();
+        setInterval(this.fetchData, 5000)
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -38,7 +39,6 @@ class Badges extends React.Component {
 
     componentWillUnmount(){
         console.log('6.- componentWillUnmount');
-        //clearTimeout(this.timeoutId);
     }
 
     fetchData = async () =>{
@@ -55,7 +55,7 @@ class Badges extends React.Component {
     render(){
         console.log('2.- Render');
 
-        if(this.state.loading){
+        if(this.state.loading && !this.state.data){
             return (
                 <React.Fragment>
                     <PageLoading/>
