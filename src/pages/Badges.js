@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import api from '../api';
 import PageLoading from '../components/PageLoading';
 import PageError from '../components/PageError';
-
+import MiniLoader from '../components/MiniLoader';
 class Badges extends React.Component {
     constructor(props){
         super(props);
@@ -21,7 +21,7 @@ class Badges extends React.Component {
     componentDidMount(){
         console.log('3.- componentDidMount')
         this.fetchData();
-        setInterval(this.fetchData, 5000)
+        this.intervalId = setInterval(this.fetchData, 5000)
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -38,6 +38,7 @@ class Badges extends React.Component {
     }
 
     componentWillUnmount(){
+        clearInterval(this.intervalId);
         console.log('6.- componentWillUnmount');
     }
 
@@ -90,6 +91,8 @@ class Badges extends React.Component {
                             </div>
                         </div>
                     </div>
+                    
+                    {this.state.loading && <MiniLoader/>}
                 </div>
             </React.Fragment>
         );
